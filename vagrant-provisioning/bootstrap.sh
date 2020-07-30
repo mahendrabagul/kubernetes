@@ -3,9 +3,9 @@
 # Update hosts file
 echo "[TASK 1] Update /etc/hosts file"
 cat >>/etc/hosts<<EOF
-192.168.1.15 kmaster.example.com kmaster
-192.168.1.11 kworker1.example.com kworker1
-192.168.1.12 kworker2.example.com kworker2
+192.168.1.15 kube-master.mahendrabagul.github.io kube-master
+192.168.1.11 kube-worker1.mahendrabagul.github.io kube-worker1
+192.168.1.12 kube-worker2.mahendrabagul.github.io kube-worker2
 EOF
 
 # Install docker from Docker-ce repository

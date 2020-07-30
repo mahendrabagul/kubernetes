@@ -3,8 +3,8 @@
 # Update hosts file
 echo "[TASK 1] Update /etc/hosts file"
 cat >>/etc/hosts<<EOF
-172.16.16.101 node1
-172.16.16.102 node2
+192.168.1.11 node1
+192.168.1.12 node2
 172.16.16.103 node3
 172.16.16.104 node4
 EOF
