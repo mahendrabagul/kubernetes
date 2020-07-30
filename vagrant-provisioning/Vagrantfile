@@ -8,38 +8,38 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", path: "bootstrap.sh"
 
   # Kubernetes Master Server
-  config.vm.define "kube-master" do |kube-master|
-    kube-master.vm.box = "centos/7"
-    kube-master.vm.hostname = "kube-master.mahendrabagul.github.io"
-    #kube-master.vm.network "private_network", ip: "192.168.1.15"
-    kube-master.vm.network "public_network", ip: "192.168.1.15"
-    kube-master.vm.provider "virtualbox" do |v|
-      v.name = "kube-master"
+  config.vm.define "kubernetesmaster" do |kubernetesmaster|
+    kubernetesmaster.vm.box = "centos/7"
+    kubernetesmaster.vm.hostname = "kubernetesmaster.mahendrabagul.github.io"
+    #kubernetesmaster.vm.network "private_network", ip: "192.168.1.15"
+    kubernetesmaster.vm.network "public_network", ip: "192.168.1.15"
+    kubernetesmaster.vm.provider "virtualbox" do |v|
+      v.name = "kubernetesmaster"
       v.memory = 2048
       v.cpus = 2
       # Prevent VirtualBox from interfering with host audio stack
       v.customize ["modifyvm", :id, "--audio", "none"]
     end
-    kube-master.vm.provision "shell", path: "bootstrap_kube-master.sh"
+    kubernetesmaster.vm.provision "shell", path: "bootstrap_kubernetesmaster.sh"
   end
 
   NodeCount = 2
 
   # Kubernetes Worker Nodes
   (1..NodeCount).each do |i|
-    config.vm.define "kube-worker#{i}" do |workernode|
+    config.vm.define "kubernetesworker#{i}" do |workernode|
       workernode.vm.box = "centos/7"
-      workernode.vm.hostname = "kube-worker#{i}.mahendrabagul.github.io"
+      workernode.vm.hostname = "kubernetesworker#{i}.mahendrabagul.github.io"
       #workernode.vm.network "private_network", ip: "172.16.16.10#{i}"
       workernode.vm.network "public_network",  ip: "192.168.1.1#{i}"
       workernode.vm.provider "virtualbox" do |v|
-        v.name = "kube-worker#{i}"
+        v.name = "kubernetesworker#{i}"
         v.memory = 1024
         v.cpus = 1
         # Prevent VirtualBox from interfering with host audio stack
         v.customize ["modifyvm", :id, "--audio", "none"]
       end
-      workernode.vm.provision "shell", path: "bootstrap_kube-worker.sh"
+      workernode.vm.provision "shell", path: "bootstrap_kubernetesworker.sh"
     end
   end
 
